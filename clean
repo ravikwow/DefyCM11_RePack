@@ -1,0 +1,112 @@
+#!/bin/sh
+
+GAPPS=./patches/gapps/system/
+APPS=./patches/apps/system/
+SETTINGS=./patches/settings/system/
+SEEDER=./patches/seeder/system/
+DEST=./clean_unsigned_$1
+DEST_SIGNED=./clean_$1
+
+
+rm $DEST
+rm $DEST_SIGNED
+cp ./$1 $DEST
+
+zip -d $DEST system/app/Apollo.apk
+zip -d $DEST system/app/Apollo.odex
+zip -d $DEST system/app/BasicDreams.apk
+zip -d $DEST system/app/BasicDreams.odex
+zip -d $DEST system/app/BluetoothExt.apk
+zip -d $DEST system/app/BluetoothExt.odex
+zip -d $DEST system/app/Camera2.apk
+zip -d $DEST system/app/Camera2.odex
+zip -d $DEST system/app/CellBroadcastReceiver.apk
+zip -d $DEST system/app/CellBroadcastReceiver.odex
+zip -d $DEST system/app/CMHome.apk
+zip -d $DEST system/app/CMHome.odex
+zip -d $DEST system/app/DSPManager.apk
+zip -d $DEST system/app/DSPManager.odex
+zip -d $DEST system/app/Email.apk
+zip -d $DEST system/app/Email.odex
+zip -d $DEST system/app/Exchange2.apk
+zip -d $DEST system/app/Exchange2.odex
+zip -d $DEST system/app/Gallery2.apk
+zip -d $DEST system/app/Gallery2.odex
+zip -d $DEST system/app/KeyChain.apk
+zip -d $DEST system/app/KeyChain.odex
+zip -d $DEST system/app/LiveWallpapers.apk
+zip -d $DEST system/app/LiveWallpapers.odex
+zip -d $DEST system/app/LiveWallpapersPicker.apk
+zip -d $DEST system/app/LiveWallpapersPicker.odex
+zip -d $DEST system/app/LockClock.apk
+zip -d $DEST system/app/LockClock.odex
+zip -d $DEST system/app/PacProcessor.apk
+zip -d $DEST system/app/PacProcessor.odex
+zip -d $DEST system/app/PicoTts.apk
+zip -d $DEST system/app/PicoTts.odex
+zip -d $DEST system/app/PhotoPhase.apk
+zip -d $DEST system/app/PhotoPhase.odex
+zip -d $DEST system/app/PhotoTable.apk
+zip -d $DEST system/app/PhotoTable.odex
+zip -d $DEST system/app/PrintSpooler.apk
+zip -d $DEST system/app/PrintSpooler.odex
+zip -d $DEST system/app/ThemeChooser.apk
+zip -d $DEST system/app/ThemeChooser.odex
+zip -d $DEST system/app/Stk.apk
+zip -d $DEST system/app/Stk.odex
+zip -d $DEST system/app/VisualizationWallpapers.apk
+zip -d $DEST system/app/VisualizationWallpapers.odex
+zip -d $DEST system/app/VoicePlus.apk
+zip -d $DEST system/app/VoicePlus.odex
+zip -d $DEST system/app/WAPPushManager.apk
+zip -d $DEST system/app/WAPPushManager.odex
+zip -d $DEST system/app/WhisperPush.apk
+zip -d $DEST system/app/WhisperPush.odex
+zip -d $DEST system/app/UserDictionaryProvider.apk
+zip -d $DEST system/app/UserDictionaryProvider.odex
+zip -d $DEST system/app/CMWallpapers.apk
+zip -d $DEST system/app/CMWallpapers.odex
+zip -d $DEST system/app/Galaxy4.apk
+zip -d $DEST system/app/Galaxy4.odex
+zip -d $DEST system/app/HoloSpiralWallpaper.apk
+zip -d $DEST system/app/HoloSpiralWallpaper.odex
+zip -d $DEST system/app/MagicSmokeWallpapers.apk
+zip -d $DEST system/app/MagicSmokeWallpapers.odex
+zip -d $DEST system/app/NoiseField.apk
+zip -d $DEST system/app/NoiseField.odex
+zip -d $DEST system/app/PhaseBeam.apk
+zip -d $DEST system/app/PhaseBeam.odex
+zip -d $DEST system/app/Browser.apk
+zip -d $DEST system/app/Browser.odex
+zip -d $DEST system/priv-app/BackupRestoreConfirmation.apk
+zip -d $DEST system/priv-app/BackupRestoreConfirmation.odex
+zip -d $DEST system/priv-app/CMAccount.apk
+zip -d $DEST system/priv-app/CMAccount.odex
+zip -d $DEST system/priv-app/CMUpdater.apk
+zip -d $DEST system/priv-app/CMUpdater.odex
+zip -d $DEST system/priv-app/ProxyHandler.apk
+zip -d $DEST system/priv-app/ProxyHandler.odex
+zip -d $DEST system/priv-app/SharedStorageBackup.apk
+zip -d $DEST system/priv-app/SharedStorageBackup.odex
+zip -d $DEST system/priv-app/VoiceDialer.apk
+zip -d $DEST system/priv-app/VoiceDialer.odex
+zip -d $DEST system/priv-app/VpnDialogs.apk
+zip -d $DEST system/priv-app/VpnDialogs.odex
+zip -d $DEST system/priv-app/ThemeManager.apk
+zip -d $DEST system/priv-app/ThemeManager.odex
+zip -d $DEST system/priv-app/ThemeChooser.apk
+zip -d $DEST system/priv-app/ThemeChooser.odex
+zip -d $DEST system/priv-app/ThemesProvider.apk
+zip -d $DEST system/priv-app/ThemesProvider.odex
+zip -d $DEST system/priv-app/Trebuchet.apk
+zip -d $DEST system/priv-app/Trebuchet.odex
+zip -d $DEST system/priv-app/PicoTts.apk
+zip -d $DEST system/priv-app/PicoTts.odex
+
+zip -gr $DEST ./system/
+
+zip -d $DEST META-INF/CERT.RSA
+zip -d $DEST META-INF/CERT.SF
+zip -d $DEST META-INF/MANIFEST.MF
+java -jar sign/signapk.jar sign/testkey.x509.pem sign/testkey.pk8 $DEST $DEST_SIGNED
+rm $DEST
